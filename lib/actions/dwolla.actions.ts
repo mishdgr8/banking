@@ -2,6 +2,8 @@
 
 import { Client } from "dwolla-v2";
 
+
+
 const getEnvironment = (): "production" | "sandbox" => {
   const environment = process.env.DWOLLA_ENV as string;
 
@@ -19,8 +21,8 @@ const getEnvironment = (): "production" | "sandbox" => {
 
 const dwollaClient = new Client({
   environment: getEnvironment(),
-  key: process.env.DWOLLA_KEY as string,
-  secret: process.env.DWOLLA_SECRET as string,
+  key: process.env.NEXT_PUBLIC_DWOLLA_KEY as string,
+  secret: process.env.NEXT_PUBLIC_DWOLLA_SECRET as string,
 });
 
 // Create a Dwolla Funding Source using a Plaid Processor Token
@@ -55,6 +57,9 @@ export const createDwollaCustomer = async (
   newCustomer: NewDwollaCustomerParams
 ) => {
   try {
+    console.log({ dwollaClient });
+    console.log({ newCustomer });
+
     return await dwollaClient
       .post("customers", newCustomer)
       .then((res) => res.headers.get("location"));
