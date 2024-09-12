@@ -14,7 +14,16 @@ const Home = async () => {
           <HeaderBox
             type="greeting"
             title="Welcome"
-            user={loggedIn?.firstName || "Guest"}
+            user={
+              `${
+                loggedIn?.firstName.charAt(0).toUpperCase() +
+                loggedIn.firstName.slice(1).toLowerCase()
+              } 
+              ${
+                loggedIn?.lastName.charAt(0).toUpperCase() +
+                loggedIn.lastName.slice(1).toLowerCase()
+              } ` || "Guest"
+            }
             subtext="Access and manage your account and transactions efficiently"
           />
 
